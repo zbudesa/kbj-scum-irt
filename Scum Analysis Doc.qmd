@@ -1,0 +1,53 @@
+---
+title: "KJB SCUM Rating Scale Analysis"
+format: html
+---
+
+## Quarto
+
+```{r}
+#| echo: false
+#| warning: false
+knitr::opts_chunk$set()
+
+library(tidyverse)
+library(rvest)
+
+# Webscrape for existing SCUM Scores
+url <- "https://oatcookies.neocities.org/kjb-scum"
+
+tables <- url %>% 
+  read_html() %>% 
+  html_table()
+
+# Combine tables for Bond and Non-Bond
+df <- bind_rows(tables[[1]] %>% transmute(Title = `Epi­sode`,
+                                      across(2:5, as.double)),
+            tables[[4]] %>% transmute(Title = `Season 2`,
+                                      across(2:5, as.double))
+            )
+
+# Time to clean up the data a bit
+df %>% 
+  # Removing the Raid because it's scores will fuck wit everything.
+  fiter(!grepl("Raid", Title))
+  mutate(
+    # Remove digits from titles
+    Title = str_remove(Title, "[:digit:]+: "),
+    # Add actor information
+    Actor = c(rep("Sean Connery",5),"George Lazenby","Sean Connery",
+            rep("Roger Moore",6), "Sean Connery","Roger Moore",
+            rep("Timothy Dalton", 2), rep("Pierce Brosnan",4),"Peter Sellers et al.",
+            rep("Daniel Craig",5), "Matt Damon", "Jeremy Renner", "Matt Damon",
+            "George Clooney, Matt Damon, Jeffrey Wright", "Chris Cooper, Ryan
+            Phillippe, Laura Linney",
+            "Will Smith, Gene Hackman"))
+
+```
+
+You can add options to executable code like this 
+
+```{r}
+
+```
+
