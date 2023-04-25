@@ -107,9 +107,85 @@ df <- web.scrape.data %>%
              2005,2007,1998,1992,1994,1997,2002,1967,2014,2021,
              2009,1964,1965,1966,1988,1966,1966,1967,1968,1968))
 
+# Having to add a bit more data by hand, 
+# Double checking based on the podcast
+additions.by.hand <- tibble(
+    Title = c(
+      "Return of the Man from UNCLE: Fifteen Years Later Affair",
+      "The Man from U.N.C.L.E.","Atomic Blond"
+      ),
+    Smarm = c(
+      4,7,7
+    ),
+    `Cul­tu­ral in­sen­si­ti­vity` = c(
+      4,4,4
+    ),
+    `Un­pro­vo­ked vio­lence` = c(
+      5,2,7
+    ),
+    `Mi­so­gy­ny` = c(
+      4,6,7
+    ),
+    Actor = c(
+      "Robert Vaughn","Henry Cavill","Charlize Theron"
+    ),
+    series = c(
+      # Last two UNCLE moveis
+      rep("U.N.C.L.E.", 2),"Other"
+    ),
+    year = c(
+      1983,2015,2017
+    )
+  )
+
+# Combine all rows & save
+df <- df %>% bind_rows(additions.by.hand)
+df <- df %>% janitor::clean_names()
+names(df)[3:5] <- c("cultural_insensitivity", "unprovoked_violence", "misogyny")
+write.csv(df, file = "scum_scores.csv")
 ```
+
+
+# Descriptives/EDA
 
 ```{r}
+dim(df)
 
+df %>% 
+  pivot_longer(smarm:misogyny) %>% 
+  group_by(name) %>% 
+  summarize(ave = mean(value, na.rm = TRUE), 
+            sd = sd(value, na.rm = TRUE),
+            median = median(value, na.rm = TRUE))
+
+
+df %>% 
+  pivot_longer(smarm:misogyny) %>% 
+  
+  ggplot(aes(x = name, y = value, fill = series)) + 
+  geom_violin() + 
+  geom_point(alpha = 1/3) +
+  geom_jitter(alpha = 1/3) + 
+  facet_wrap(~ series) +
+  coord_flip()
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
