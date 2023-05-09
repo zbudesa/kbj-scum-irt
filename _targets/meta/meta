@@ -1,0 +1,10 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+clean_data|function|40918634bc4ccaa1|||||||||||||||
+clean_names|function|f47c8d9b21f58f73|||||||||||||||
+data|stem|2d373c0c5c4b8e42|2141127d992daa4c|b2a47904891b91c3|1588979285||t19486.0250985387s|ee0f3e8c0a6c5fe0|1336|rds|local|vector|||0.35|1m22mThere were 2 warnings in transmute.The first warning was1m22m36mℹ39m In argument across25, as.double.Caused by warning33m39m NAs introduced by coercion1m22m36mℹ39m Run dplyrlast_dplyr_warnings to see the 1 remaining warning.|
+df|stem|61c8be0ec873e7ed|2ba455f5c74230d9|daab5bdacbefc8ce|-1046211958||t19486.0250993717s|159f8594bfb2f075|1767|rds|local|vector|||0.06||
+df_weird_names|stem|02e3babc38c111bb|2ba455f5c74230d9|ec4a0b1ff8cd2668|-1513371935||t19486.0165174714s|241bf920421d9078|105|rds|local|vector|||0.08||
+get_data|function|68393ab6b1c8f657|||||||||||||||
+save|stem|c1c3c7b065e2a288|3017e350c2a99ab5|62a393e4a1363a60|-937958648||t19486.0250995994s|a1c456b03adbfbf8|44|rds|local|vector|||0||
+save_data|function|c13dcf43a9bc557d|||||||||||||||
+url|stem|97b49cb918829019|b61959d6c56c273c|ef46db3751d8e999|-1139720308||t19486.0088340302s|8fcb0666863d3c08|92|rds|local|vector|||0.66||
